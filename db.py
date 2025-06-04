@@ -21,7 +21,7 @@ def init_db():
 def save_countries(countries, continent_name):
     session = Session()
     with engine.begin() as conn:
-        # Удалим старые данные для континента
+        # Очистим данные по континенту перед вставкой
         conn.execute(countries_table.delete().where(countries_table.c.continent == continent_name))
         for c in countries:
             langs = ', '.join(l['name'] for l in c['languages']) if c['languages'] else ''

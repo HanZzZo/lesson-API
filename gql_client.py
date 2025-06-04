@@ -9,18 +9,6 @@ transport = RequestsHTTPTransport(
 
 client = Client(transport=transport, fetch_schema_from_transport=True)
 
-def get_continents():
-    query = gql("""
-    {
-      continents {
-        code
-        name
-      }
-    }
-    """)
-    result = client.execute(query)
-    return result["continents"]
-
 def get_countries_by_continent(continent_code):
     query = gql(f"""
     {{
@@ -38,4 +26,4 @@ def get_countries_by_continent(continent_code):
     }}
     """)
     result = client.execute(query)
-    return result["continent"]["countries"]
+    return result["continent"]
