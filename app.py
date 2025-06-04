@@ -1,7 +1,8 @@
+from db import init_db, save_countries
 import streamlit as st
 from countries_api import get_continents, get_countries_by_continent
 
-st.title("🌍 Countries Explorer (GraphQL)")
+st.title(init_db())
 
 continents = get_continents()
 continent_map = {c["name"]: c["code"] for c in continents}
@@ -17,3 +18,7 @@ if selected:
         langs = [l['name'] for l in c['languages']]
         st.markdown(f"Языки: {', '.join(langs) if langs else 'нет данных'}")
         st.markdown("---")
+    
+    save_countries(countries, selected)
+    st.success("✅ Данные сохранены в базу")
+
